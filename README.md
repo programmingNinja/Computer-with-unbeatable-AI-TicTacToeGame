@@ -42,7 +42,6 @@ Note: The project folder is inside the repo (named "TicTacToeComputer") and not 
 Future Work:
 ============
 
-Even though the Min-Max algorithm does the work, and Tic Tac Toe is not a computationally heavy game, the program can be
-made more efficient by using the Min-Max with Alpha Beta pruning algorithm instead of just Min-Max algorithm. This will
-not make a considerable or even noticeable difference in the working of the game but alpha beta pruning is more efficient
-than min-max.
+1) Even though the Min-Max algorithm does the work, and Tic Tac Toe is not a computationally heavy game, the program can be made more efficient by using the Min-Max with Alpha Beta pruning algorithm instead of just Min-Max algorithm. This will not make a considerable or even noticeable difference in the working of the game but alpha beta pruning is more efficient than min-max.
+2) Giving the game some graphics so that it can not only be run on a console.
+3) Combining the simple two player tic-tac-toe game (can find the game in an another repo), with the unbeatable computer tic-tac-toe game and giving the user to select who he wants to play against? Computer or another human player.
