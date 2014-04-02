@@ -44,8 +44,8 @@ public class Main
     public static void main(String[] args) 
     {
         Scanner input = new Scanner(System.in);
-        GameState cont = null ;
-        int choice; 
+        GameState continueGame = null ;
+        int choice=3; 
         do{
 
             System.out.println("MENU:");
@@ -55,8 +55,25 @@ public class Main
             System.out.println("3) Play Game");
             System.out.println("4) Exit");
             System.out.println("--------------------");
-            choice = input.nextInt();
-
+            try
+            {
+               choice = input.nextInt();
+            }
+            catch(Exception e)
+            {
+                System.out.println("invalid input");
+            }
+            while (choice <= 0 || choice > 4) 
+            {
+               System.out.println("Please enter number between 1 to 4!");
+               while (!input.hasNextInt()) 
+               {
+                   System.out.println("That's not a number!");
+                   input.next(); 
+               }
+                choice = input.nextInt();
+            } 
+            
             switch(choice)
             {
                 case 1:
@@ -69,7 +86,7 @@ public class Main
 
                 case 3:
                     GameWorld newGame = new GameWorld();
-                    cont = newGame.getState();
+                    continueGame = newGame.getState();
                     break;
 
                 case 4:
@@ -80,7 +97,7 @@ public class Main
                     choice = 0;
             }
         }
-        while(choice >= 0 && choice<4 || cont != null);
+        while(choice >= 0 && choice<4 || continueGame != null);
         
     }
     
