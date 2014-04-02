@@ -31,13 +31,13 @@ public class GridLocation
         col = locationCol;
         clear();
     }
-    // clears the content of the cell and sets it to an empty space.
+    
     void clear()
     {
         seed = Content.EMPTY;
     }
     
-    // prints the cell content
+    
     void drawCell()
     {
         switch(seed)
