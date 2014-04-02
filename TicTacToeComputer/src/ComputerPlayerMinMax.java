@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +51,7 @@ public class ComputerPlayerMinMax extends ComputerPlayer
     
     private int[] minMax(int depth, Content player)
     {
-        // generating possible moves.
+        
         List<int[]> allMoves = generateMoves();
         
         // maximizing for computer and minimizing for opposition
@@ -62,7 +61,6 @@ public class ComputerPlayerMinMax extends ComputerPlayer
         int currentScore;
         int bestRow = -1, bestCol = -1;
         
-        // evaluatiing the score after making all moves 
         if(allMoves.isEmpty() || depth == 0)
             bestScore = evaluateScore();
         else
@@ -74,7 +72,6 @@ public class ComputerPlayerMinMax extends ComputerPlayer
                 
                 if(player == myContent)
                 {
-                    // maximizing computer's score
                     currentScore = minMax(depth-1, oppositionContent)[0];
                     if(currentScore > bestScore)
                     {
@@ -85,7 +82,6 @@ public class ComputerPlayerMinMax extends ComputerPlayer
                 }
                 else
                 {
-                    // minimizing oppositions score
                     currentScore = minMax(depth-1, myContent)[0];
                     if(currentScore < bestScore)
                     {
@@ -94,7 +90,7 @@ public class ComputerPlayerMinMax extends ComputerPlayer
                         bestCol = moves[1];
                     }
                 }
-                // undo moves so that grid is clear.
+                
                 cells[moves[0]][moves[1]].clear();
             }
         }
@@ -123,7 +119,6 @@ public class ComputerPlayerMinMax extends ComputerPlayer
    private int evaluateLines(int row1, int col1, int row2, int col2, int row3, int col3) 
    {
       int score = 0; 
-      // First cell
       if (cells[row1][col1].seed == myContent) 
       {
          score = 1;
@@ -133,17 +128,14 @@ public class ComputerPlayerMinMax extends ComputerPlayer
          score = -1;
       }
  
-      // Second cell
       if (cells[row2][col2].seed == myContent) 
       {
          if (score == 1) 
          {   
-            // cell1 is mySeed
             score = 10;
          } 
          else if (score == -1) 
          {  
-            // cell1 is oppSeed
             return 0;
          } 
          else 
@@ -156,12 +148,10 @@ public class ComputerPlayerMinMax extends ComputerPlayer
       {
          if (score == -1) 
          { 
-            // cell1 is oppSeed
             score = -10;
          } 
          else if (score == 1) 
          { 
-            // cell1 is mySeed
             return 0;
          } 
          else 
@@ -171,17 +161,14 @@ public class ComputerPlayerMinMax extends ComputerPlayer
          }
       }
  
-      // Third cell
       if (cells[row3][col3].seed == myContent) 
       {
          if (score > 0) 
          {  
-            // cell1 and/or cell2 is mySeed
             score *= 10;
          } 
          else if (score < 0) 
-         {  
-            // cell1 and/or cell2 is oppSeed
+         { 
             return 0;
          } 
          else 
@@ -194,12 +181,10 @@ public class ComputerPlayerMinMax extends ComputerPlayer
       {
          if (score < 0) 
          {  
-            // cell1 and/or cell2 is oppSeed
             score *= 10;
          } 
          else if (score > 1) 
          {  
-            // cell1 and/or cell2 is mySeed
             return 0;
          } 
          else 
@@ -210,7 +195,7 @@ public class ComputerPlayerMinMax extends ComputerPlayer
       }
       return score;
    }
-   // generate all possible moves
+
     private List<int[]> generateMoves()
     {
         List<int[]> possibleMoves = new ArrayList<int[]>();
