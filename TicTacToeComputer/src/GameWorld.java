@@ -8,6 +8,7 @@
  * - updates the grid
  * - switches the player according to their turns.
  * - handles the moves of the players
+ * - decides who will play first based on user input
  * 
  * Member variables(Data type):
  * 1) gameGrid (Grid) = The grid on which the game will be played
@@ -39,7 +40,31 @@ public class GameWorld
         gameGrid = new Grid();
         ComputerPlayerMinMax computer = new ComputerPlayerMinMax(gameGrid);
         computer.setContent(Content.CROSS);
-        worldInit();
+        int firstPlayer = -1;
+        System.out.println("The symbol for computer is X and your symbol is O");
+        System.out.println("Press 0(zero) if you want to play first and 1(one) if you "+
+                "\nwant computer to play first");
+        try
+            {
+               firstPlayer = input.nextInt();
+            }
+            catch(Exception e)
+            {
+                System.out.println("invalid input");
+            }
+            while (firstPlayer < 0 || firstPlayer > 1) 
+            {
+               System.out.println("Please enter either 1 or 0");
+               while (!input.hasNextInt()) 
+               {
+                   System.out.println("That's not a number!");
+                   input.next(); 
+               }
+                firstPlayer = input.nextInt();
+            } 
+        worldInit(firstPlayer);
+        System.out.println("Game grid before start");
+        gameGrid.drawGrid();
         do
         {
             playerMove(currentPlayer, computer);
@@ -75,7 +100,7 @@ public class GameWorld
     {
         return this.currentState;
     }
-    // Handles the moves of the player, takes the input as the symbol of the current player
+    
     void playerMove(Content thisSeed, ComputerPlayerMinMax comp)
     {
         
@@ -98,10 +123,9 @@ public class GameWorld
             {
                 System.out.println("");
                 System.out.println("Player O please enter the location where you want to place your "+thisSeed+"\n"
-                + "The input should be (row[1-3] , column[1-3]) WITHOUT commas, and ONLY SPACES between two digits\n"+
-                "entering alphabets as input will crash the game");
+                + "The input should be (row[1-3] , column[1-3]) WITHOUT commas, and ONLY SPACES between two digits");
               
-               try
+                try
                 {
                     row = input.nextInt()-1;
                 }
@@ -112,7 +136,7 @@ public class GameWorld
                 col = input.nextInt()-1;
                 System.out.println("");
             }
-            // checking the correctness of the input and seeing whether that cell to be filled is empty.
+            
             if(row>=0 && row<3 && col>=0 && col<3 && gameGrid.cell[row][col].seed == Content.EMPTY)
             {
                 gameGrid.cell[row][col].seed = thisSeed;
@@ -131,11 +155,14 @@ public class GameWorld
         while(!validInput);
     }
     
-    void worldInit()
+    void worldInit(int first)
     {
         gameGrid.init();
         currentState = GameState.PLAYING;
-        currentPlayer = Content.NOUGHT;        
+        if(first == 0)
+            currentPlayer = Content.NOUGHT;
+        else
+            currentPlayer = Content.CROSS;
     }
     
     void updateGameState(Content thisSeed)
