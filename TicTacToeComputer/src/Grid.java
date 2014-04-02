@@ -33,24 +33,20 @@ public class Grid
     int emptySpacesRemaining;
     int currentRow, currentCol;
     GridLocation[][] cell;
-    
-    // constructor
+  
     Grid()
     {
-        // initializing the cell array, allocating memory
         cell = new GridLocation[ROWS][COLS];
         emptySpacesRemaining = ROWS * COLS;
         for(int i = 0 ; i<ROWS ; i++)
         {
             for(int j=0 ; j<COLS ; j++)
             {
-                // initializing each cell in the array
                 cell[i][j] = new GridLocation(i, j);
             }
         }
     }
-    
-    // initializing the grid by making all the cells empty
+   
     public void init() 
     {
       for (int row = 0; row < ROWS; ++row) 
@@ -62,7 +58,6 @@ public class Grid
       }
     }
     
-    // printing the grid
     void drawGrid()
     {
         for(int i=0 ; i<ROWS ; i++)
@@ -80,7 +75,6 @@ public class Grid
         }
     }
     
-    // checking if the game is a draw or players can still make a move
     boolean isDraw()
     {
         // the grid does not have any empty space hence the game is drawn
@@ -89,7 +83,6 @@ public class Grid
         else return false;
     }
     
-    // Checking if the player who just made the move has won or not
     boolean hasWon(Content thisSeed)
     {               // checking rows for victory
         return ( (cell[currentRow][0].seed == thisSeed &&
