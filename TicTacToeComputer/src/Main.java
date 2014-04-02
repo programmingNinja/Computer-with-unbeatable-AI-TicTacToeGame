@@ -20,8 +20,18 @@ public class Main
     /**
      * @param args the command line arguments
      */
+    static void showMenu()
+    {
+        System.out.println("MENU:");
+        System.out.println("--------------------");
+        System.out.println("1) About");
+        System.out.println("2) Intructions");
+        System.out.println("3) Play Game");
+        System.out.println("4) Exit");
+        System.out.println("--------------------");
+    }
     
-    static void about()
+    static void showAbout()
     {
         System.out.println(" About:"
                 + "\n ========================"
@@ -30,7 +40,7 @@ public class Main
                 + "\n The developer of this game is Rohan D. Shah\n");
     }
     
-    static void instructions()
+    static void showInstructions()
     {
         System.out.println(" Instructions:"
                 + "\n ======================"
@@ -45,16 +55,9 @@ public class Main
     {
         Scanner input = new Scanner(System.in);
         GameState continueGame = null ;
-        int choice=3; 
+        int choice=0; 
         do{
-
-            System.out.println("MENU:");
-            System.out.println("--------------------");
-            System.out.println("1) About");
-            System.out.println("2) Intructions");
-            System.out.println("3) Play Game");
-            System.out.println("4) Exit");
-            System.out.println("--------------------");
+            showMenu();            
             try
             {
                choice = input.nextInt();
@@ -69,7 +72,7 @@ public class Main
                while (!input.hasNextInt()) 
                {
                    System.out.println("That's not a number!");
-                   input.next(); 
+                   input.next(); // this is important!
                }
                 choice = input.nextInt();
             } 
@@ -77,11 +80,11 @@ public class Main
             switch(choice)
             {
                 case 1:
-                    about();
+                    showAbout();
                     break;
 
                 case 2:
-                    instructions();
+                    showInstructions();
                     break;
 
                 case 3:
